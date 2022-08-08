@@ -5,8 +5,8 @@ const httpServer = createServer();
 
 const options = {
   cors: {
-    origin: "https://ndik.helloworld.my.id",
-    // origin: "*",
+    // origin: "https://ndik.helloworld.my.id",
+    origin: "*",
   },
 };
 
