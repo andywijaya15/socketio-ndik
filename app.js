@@ -1,12 +1,12 @@
 import { createServer } from "http";
-import  {Server}  from "socket.io";
+import { Server } from "socket.io";
 
 const httpServer = createServer();
 
 const options = {
   cors: {
-    // origin: "https://ndik.helloworld.my.id",
-    origin: "*",
+    origin: "https://ndik.helloworld.my.id",
+    // origin: "*",
   },
 };
 
@@ -18,7 +18,7 @@ io.use((socket, next) => {
 
 io.on("connection", (socket) => {
   socket.on("connected", (data) => {
-    console.log(`${data.username} Connected`)
+    console.log(`${data.username} Connected`);
     socket.emit("nyambung", `Welcome ${data.username}`);
   });
 });
