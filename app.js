@@ -18,6 +18,7 @@ io.use((socket, next) => {
 
 io.on("connection", (socket) => {
   socket.on("connected", (data) => {
+    console.log(`${data.username} Connected`)
     socket.emit("nyambung", `Welcome ${data.username}`);
   });
 });
