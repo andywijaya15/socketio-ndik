@@ -22,6 +22,8 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(3000, () => {
-  console.log("Hahaha nyala di 3000");
+const port = process.env.PORT || 3000;
+
+httpServer.listen(port, () => {
+  console.log(`Hahaha nyala di ${port}`);
 });
