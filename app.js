@@ -17,18 +17,21 @@ io.use((socket, next) => {
   next();
 });
 
-
 io.on("connection", (socket) => {
-  socket.on("sapa",(req)=>{
-    if(socket.client.conn.server.clientsCount>1){
-      socket.broadcast.emit("dapetsapa",req.username);
-    }else{
+  socket.on("sapa", (req) => {
+    if (socket.client.conn.server.clientsCount > 1) {
+      socket.broadcast.emit("dapetsapa", req.username);
+    } else {
       socket.emit("nooneonline");
     }
   });
 
-  socket.on("sendmsg",(data)=>{
-    socket.broadcast.emit("recmsg",data);
+  socket.on("openchatroom", (data) => {
+    socket.broadcast.emit("joinedroom", data.username);
+  });
+
+  socket.on("sendmsg", (data) => {
+    socket.broadcast.emit("recmsg", data);
   });
 });
 
