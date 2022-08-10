@@ -17,6 +17,7 @@ io.use((socket, next) => {
   next();
 });
 
+
 io.on("connection", (socket) => {
   socket.on("sapa",(req)=>{
     if(socket.client.conn.server.clientsCount>1){
@@ -24,6 +25,10 @@ io.on("connection", (socket) => {
     }else{
       socket.emit("nooneonline");
     }
+  });
+
+  socket.on("sendmsg",(data)=>{
+    socket.broadcast.emit("recmsg",data);
   });
 });
 
