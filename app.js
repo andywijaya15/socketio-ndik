@@ -22,8 +22,7 @@ io.on("connection", (socket) => {
     if(socket.client.conn.server.clientsCount>1){
       socket.broadcast.emit("dapetsapa",req.username);
     }else{
-      console.log(socket.socketId);
-      // io.to(socket.socketId).emit(/* ... */);
+      socket.emit("nooneonline");
     }
   });
 });
