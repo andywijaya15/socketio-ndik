@@ -18,6 +18,8 @@ io.use((socket, next) => {
 });
 
 io.on("connection", (socket) => {
+  let addedUser = false;
+
   socket.on("sapa", (req) => {
     if (socket.client.conn.server.clientsCount > 1) {
       socket.broadcast.emit("dapetsapa", req.username);
@@ -27,11 +29,25 @@ io.on("connection", (socket) => {
   });
 
   socket.on("openchatroom", (data) => {
-    socket.emit("joinedroom", data.username);
+    if (socket.client.conn.server.clientsCount > 1) {
+      if (addedUser) {
+        return;
+      } else {
+        socket.username = data.username;
+        addedUser = true;
+        socket.broadcast.emit("joinedroom", { username: socket.username });
+        socket.emit("joinedroom", { username: socket.username });
+      }
+    } else {
+      socket.emit("noone");
+    }
   });
 
   socket.on("sendmsg", (data) => {
-    socket.broadcast.emit("recmsg", data);
+    socket.broadcast.emit("recmsg", {
+      username: data.username,
+      msg: data.msg,
+    });
   });
 });
 
