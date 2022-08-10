@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("openchatroom", (data) => {
-    socket.broadcast.emit("joinedroom", data.username);
+    socket.emit("joinedroom", data.username);
   });
 
   socket.on("sendmsg", (data) => {
