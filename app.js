@@ -19,6 +19,7 @@ io.use((socket, next) => {
 
 io.on("connection", (socket) => {
   socket.on("sapa",(req)=>{
+    console.log(socket.client.conn.server.clientsCount);
     if(socket.client.conn.server.clientsCount>1){
       socket.broadcast.emit("dapetsapa",req.username);
     }else{
