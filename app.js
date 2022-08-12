@@ -49,6 +49,10 @@ io.on("connection", (socket) => {
       msg: data.msg,
     });
   });
+
+  socket.on("reqreftable",(data)=>{
+    socket.broadcast.emit("resreftable",data);
+  });
 });
 
 const port = process.env.PORT || 3000;
